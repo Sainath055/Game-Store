@@ -1,5 +1,6 @@
 "use cilent"
 
+import { MultiplySymbol } from '@/assets/LogoSvgs';
 import { Select } from 'antd'
 import React, { useEffect, useState } from 'react'
 
@@ -43,9 +44,12 @@ const SearchFilters = ({ closeViewDetails,handleClearSearchBar,
 
   return (
     <div className='w-full h-full flex flex-col items-center justify-between'>
-        <div className='w-full h-max flex items-center px-8
+        <div className='w-full h-max flex items-center justify-between px-8
         text-white pt-12 pb-4 text-[22px] bg-[#323232]'>
-            Filters
+            <p>Filters</p>
+            <button onClick={closeViewDetails}>
+                <MultiplySymbol />
+            </button>
         </div>
         <div className='w-full h-full flex flex-col items-center gap-y-10 pt-8
             px-8 '>
