@@ -161,7 +161,7 @@ export default function homeLayout({ children }) {
               It has a search functionality with filter and its completely mobile responsive.
             </p>
             <p className='text-[14px] '>
-              Project source code - <a href='https://www.google.com/' 
+              Project source code - <a href='https://github.com/Sainath055/Game-Store' 
               target='_blank'
               className='w-max underline hover:text-blue-500 duration-100 ease-in'>
                 Github</a>
