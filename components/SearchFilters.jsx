@@ -47,7 +47,7 @@ const SearchFilters = ({ closeViewDetails,handleClearSearchBar,
         <div className='w-full h-max flex items-center justify-between px-8
         text-white pt-12 pb-4 text-[22px] bg-[#323232]'>
             <p>Filters</p>
-            <button onClick={closeViewDetails}>
+            <button onClick={closeViewDetails} className='sm:hidden block'>
                 <MultiplySymbol />
             </button>
         </div>
