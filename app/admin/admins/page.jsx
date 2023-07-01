@@ -48,7 +48,7 @@ const Admins = () => {
 
   const delAdminBtn = async (id) => {
    
-    if(adminId === "649de1b33c34fa9777057510") {
+    if(id === "649de1b33c34fa9777057510") {
       message.info(`Restricted for admin@demo.com`)
     } else {
       try {
