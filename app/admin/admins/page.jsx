@@ -17,6 +17,7 @@ const Admins = () => {
     }
   })
   var userCheck = session && session.user.isAdmin
+  var adminId = session && session.user.id
   const [isLoading, setLoading] = useState(true);
 
   var currentAdminEmail = session ? session.user.email : 'null'
@@ -48,7 +49,7 @@ const Admins = () => {
 
   const delAdminBtn = async (id) => {
    
-    if(id === "649de1b33c34fa9777057510") {
+    if(adminId === "649de1b33c34fa9777057510") {
       message.info(`Restricted for admin@demo.com`)
     } else {
       try {
