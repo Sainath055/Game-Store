@@ -48,18 +48,23 @@ const Admins = () => {
 
   const delAdminBtn = async (id) => {
    
-    try {
-      const response = await fetch(`/api/admin/${id}`, {
-        method: "DELETE",
-      });
-      if (response.ok) {
-        const filteredAdmins = existingAdmins.filter((item) => item._id !== id);
-        message.success('Admin deleted successfully')
-        setExistingAdmins(filteredAdmins)
+    if(adminId === "649de1b33c34fa9777057510") {
+      message.info(`Restricted for admin@demo.com`)
+    } else {
+      try {
+        const response = await fetch(`/api/admin/${id}`, {
+          method: "DELETE",
+        });
+        if (response.ok) {
+          const filteredAdmins = existingAdmins.filter((item) => item._id !== id);
+          message.success('Admin deleted successfully')
+          setExistingAdmins(filteredAdmins)
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
+    
   }
 
   if (isLoading) {
