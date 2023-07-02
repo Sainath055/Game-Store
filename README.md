@@ -8,7 +8,7 @@ A full stack application, with attractive UI. Its has all the functionalities as
 
 ## Demo
 
-https://game-store-2a27lfrkt-sainath055.vercel.app/
+https://game-store-git-main-sainath055.vercel.app/
 
 ### Test Credentials
 
