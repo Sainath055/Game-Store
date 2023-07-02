@@ -86,9 +86,9 @@ You can also checkout .env.example file
 
 
 
-## FAQ
+## Additional
 
-#### In case you are wondering how i got all the products data?
+#### In case you are wondering how I got all the products data?
 
 I collected it myself and added through admin pannel.
 
