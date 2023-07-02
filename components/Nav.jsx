@@ -7,7 +7,7 @@ import { BagContext } from '@/context/BagContext';
 import { Badge, Dropdown, message } from 'antd';
 import '../app/globals.css'
 import {  usePathname, useRouter } from 'next/navigation';
-import { LibraryIconBlocks } from '@/assets/LogoSvgs';
+import { LibraryIconBlocks, MultiplySymbol } from '@/assets/LogoSvgs';
 
 const Nav = ({ userId, userName }) => {
 
@@ -21,6 +21,8 @@ const Nav = ({ userId, userName }) => {
     const [viewMore, setViewMore] = useState(false);
     const [openSugg, setOpenSugg] = useState(false);
     const [suggItems, setSuggItems] = useState([]);
+
+    const [mobileSugg, setMobileSugg] = useState(false);
 
     const onClick = ({ key }) => {
         if (key === 'sign_out') {
@@ -101,8 +103,8 @@ const Nav = ({ userId, userName }) => {
         setSuggItems([])
     }
 
-    const handleBlur = () => {
-        setOpenSugg(false)
+    const handleMobileSugg = () => {
+        setMobileSugg((prev) => !prev);
     };
 
   return (
@@ -121,8 +123,83 @@ const Nav = ({ userId, userName }) => {
                 </div>
             </Link>
 
+        <div className={'w-full h-screen bg-[#202020aa] '+ 
+        'absolute top-[70px] left-0 right-0 flex-col items-center ' +
+        ' sm:hidden justify-between ' + 
+        (pathname === '/home/search' ? ' hidden ' : mobileSugg ? ' flex ' : ' hidden ')}>
+            <div className='w-full h-max px-3.5
+            flex flex-col justify-center items-center relative mt-3.5'>
+                <div className='w-max h-max absolute left-6'>
+                    <svg xmlns="http://www.w3.org/2000/svg" 
+                    width="18px" height="18px" 
+                    viewBox="0 0 256 256"><path fill="currentColor" 
+                    d="m228.24 219.76l-51.38-51.38a86.15 86.15 0 1 0-8.48 8.48l51.38 51.38a6 6 0 0 0 8.48-8.48ZM38 112a74 74 0 1 1 74 74a74.09 74.09 0 0 1-74-74Z">
+                    </path></svg>
+                </div>
+                <button onClick={()=>setSearchVal('')}
+                className={'absolute w-max h-max right-6 text-[#e9e6e6] '+ 
+                (searchVal.length > 0 ? ' flex ' : ' hidden ')}>
+                <svg xmlns="http://www.w3.org/2000/svg" 
+                width="14px" height="14px" 
+                viewBox="0 0 16 16"><path fill="currentColor" fillRule="evenodd" 
+                d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16ZM4.22 4.22a.75.75 0 0 1 1.06 0L8 6.94l2.72-2.72a.75.75 0 1 1 1.06 1.06L9.06 8l2.72 2.72a.75.75 0 1 1-1.06 1.06L8 9.06l-2.72 2.72a.75.75 0 0 1-1.06-1.06L6.94 8L4.22 5.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd">
+                </path></svg>
+                </button>
+                <input onChange={searchInput} autoComplete="off" 
+                onKeyDown={searchKeyDown}
+                value={searchVal}
+                onFocus={()=>setOpenSugg(true)}
+                // onBlur={handleBlur}
+                type='text' name="search" 
+                placeholder='Search'
+                className='w-full h-max bg-[#202020] text-white box-border
+                hover:border-[#ffffff84] focus:border-[#ffffff84] py-1
+                border border-[#ffffff60] tracking-[1px] pl-8 pr-8 rounded-[8px]
+                focus:outline-none text-[14px] leading-7 placeholder:text-[#989898]'/>
+
+                <div
+                className={'w-full h-max absolute top-[45px] left-0 bg-[#202020] rounded-lg ' +
+                ' items-center box-border shadow-md shadow-[#2a2a2a] ' +
+                (searchVal.length > 0 && suggItems.length > 0 && openSugg ? ' flex ' : ' hidden ')}>
+                {isLoading ? 
+                    <div className='w-full h-max p-4 flex flex-col items-start gap-y-2'>
+                        {[...Array(4)].map((_ , i) => (
+                            <div key={i} className='w-full h-[55px] flex items-center gap-x-2 p-1 animate-pulse'>
+                                <div className='w-[80px] h-[45px] bg-[#3f3f3f] rounded-[6px]'></div>
+                                <div className='w-full h-[26px] bg-[#3f3f3f] rounded-[6px]'></div>
+                            </div>
+                        ))}
+                    </div>
+                    :
+                    <div className='w-full h-max flex flex-col items-start gap-y-2 p-4'>
+                        {suggItems.map((data, i)=> (
+                            <div key={i} className='w-full h-max flex items-center gap-x-2 p-1'>
+                                <img onClick={()=> toProductDetails(data._id)} 
+                                src={data.mainImg} 
+                                className='w-[55px] aspect-[16/9] h-max rounded-[6px] cursor-pointer' />
+                                <p onClick={()=> toProductDetails(data._id)}  
+                                className='hover:underline cursor-pointer text-[14px]
+                                 text-ellipsis line-clamp-1'>
+                                    {data.title}
+                                </p>
+                            </div>
+                        ))}
+                        <div className={'w-max h-max '+ (viewMore ? ' flex ' : ' hidden ')}>
+                            <button onClick={toSearchPage}
+                            className='text-[16px] px-1.5 hover:underline'>View more</button>
+                        </div>
+                    </div>
+                }
+                </div>
+            </div>
+            <div onClick={handleMobileSugg} className=' w-full h-full mt-4'>
+
+            </div>
+        </div>
+
+
             <div className={'w-full h-max flex-col justify-center relative hidden '+
-                (pathname === '/home/search' ? ' sm:hidden ' : ' sm:flex ')}>
+                (pathname === '/home/search' ? ' hidden ' : ' sm:flex ')}>
                 <div className='w-max h-max absolute left-2.5'>
                     <svg xmlns="http://www.w3.org/2000/svg" 
                     width="18px" height="18px" 
@@ -186,14 +263,23 @@ const Nav = ({ userId, userName }) => {
                 </div>
             </div>
 
-            <Link href={`/home/search`} className={'w-max h-max p-0.5 cursor-pointer ' +
+            <button onClick={handleMobileSugg} className={'w-max h-max p-0.5 cursor-pointer ' +
             (pathname === '/home/search' ? ' hidden ' : ' sm:hidden flex ')}>
-                <svg xmlns="http://www.w3.org/2000/svg" 
-                width="20px" height="20px" 
-                viewBox="0 0 256 256"><path fill="currentColor" 
-                d="m228.24 219.76l-51.38-51.38a86.15 86.15 0 1 0-8.48 8.48l51.38 51.38a6 6 0 0 0 8.48-8.48ZM38 112a74 74 0 1 1 74 74a74.09 74.09 0 0 1-74-74Z">
-                </path></svg>
-            </Link>
+                {
+                    mobileSugg ? 
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                    width="22px" height="22px" 
+                    viewBox="0 0 24 24"><path fill="currentColor" 
+                    d="m12 13.4l-4.9 4.9q-.275.275-.7.275t-.7-.275q-.275-.275-.275-.7t.275-.7l4.9-4.9l-4.9-4.9q-.275-.275-.275-.7t.275-.7q.275-.275.7-.275t.7.275l4.9 4.9l4.9-4.9q.275-.275.7-.275t.7.275q.275.275.275.7t-.275.7L13.4 12l4.9 4.9q.275.275.275.7t-.275.7q-.275.275-.7.275t-.7-.275L12 13.4Z">
+                    </path></svg>
+                    :
+                    <svg xmlns="http://www.w3.org/2000/svg" 
+                    width="20px" height="20px" 
+                    viewBox="0 0 256 256"><path fill="currentColor" 
+                    d="m228.24 219.76l-51.38-51.38a86.15 86.15 0 1 0-8.48 8.48l51.38 51.38a6 6 0 0 0 8.48-8.48ZM38 112a74 74 0 1 1 74 74a74.09 74.09 0 0 1-74-74Z">
+                    </path></svg>
+                }
+            </button>
 
         </div>
 
