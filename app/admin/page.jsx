@@ -18,6 +18,7 @@ export default function adminHome() {
           setOrdersData(data.allOrders)
           setProductsData(data.allProducts)
           setUsersData(data.allUsers)
+          console.log(data)
         }
     } catch (error) {
         console.log(error);
@@ -43,6 +44,14 @@ export default function adminHome() {
   const genreCount = {};
   const platformCount = {};
 
+  let successCount = 0;
+  let failedCount = 0;
+
+  let userCount = 0;
+  let googleUserCount = 0;
+
+
+
   productsData?.forEach((product) => {
     product.genre.forEach((genre) => {
       genreCount[genre] = (genreCount[genre] || 0) + 1;
@@ -53,9 +62,6 @@ export default function adminHome() {
     });
   });
 
-  let successCount = 0;
-  let failedCount = 0;
-
   ordersData?.forEach((order) => {
     if (order.paymentStatus === "Payment successful") {
       successCount++;
@@ -64,9 +70,6 @@ export default function adminHome() {
     }
   });
 
-  let userCount = 0;
-  let googleUserCount = 0;
-  
   usersData?.forEach((user) => {
     if (user.isAdmin === false) {
       if (user.googleAccount) {
@@ -77,6 +80,8 @@ export default function adminHome() {
     } 
   });
 
+  console.log(userCount)
+  console.log(googleUserCount)
 
   return (
     <>
