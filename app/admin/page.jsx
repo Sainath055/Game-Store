@@ -12,13 +12,12 @@ export default function adminHome() {
 
   const fetchAllData = async () => {
     try {
-        const response = await fetch(`/api/dashboard`, { method: "GET", }); 
+        const response = await fetch(`/api/dashboard`, { method: "GET", },{ cache: 'no-store' }); 
         const data = await response.json();
         if (response.ok) {
           setOrdersData(data.allOrders)
           setProductsData(data.allProducts)
           setUsersData(data.allUsers)
-          console.log(data)
         }
     } catch (error) {
         console.log(error);
@@ -80,8 +79,6 @@ export default function adminHome() {
     } 
   });
 
-  console.log(userCount)
-  console.log(googleUserCount)
 
   return (
     <>
