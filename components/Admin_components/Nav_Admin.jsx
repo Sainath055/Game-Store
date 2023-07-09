@@ -44,7 +44,7 @@ const Nav_Admin = ({ setOpenMenuDiv, openMenuDiv, userName }) => {
         </Link>
       </div>
       
-      <p className='text-[18px]'>Admin Pannel</p>
+      <p className='text-[18px]'>Admin Panel</p>
 
       <button className='w-max h-max px-2.5 py-1 border-2 text-[16px] rounded-lg'
         onClick={handleSignOut}>
