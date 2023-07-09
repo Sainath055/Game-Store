@@ -2,7 +2,6 @@
 import connectMongo  from '@/database/db.js'
 import ProductModal from '@/models/product.js'; 
 import banNsideModel from '@/models/banner&sidesec'
-import { NextResponse } from 'next/server';
 
 export const GET = async (request) => {
     try {
@@ -31,12 +30,12 @@ export const GET = async (request) => {
 
         const updatedProducts = Products.filter((item) => !allListIds.includes(item.id));
         
-        return NextResponse.json({
+        return new Response(JSON.stringify({
             allProducts:updatedProducts.splice(0,18), 
             bannerProducts:bannerListProducts,
             sideSecProducts:sideSecListProducs,
             sideSecHeading:sideHeading,
-        })
+        }), { status: 200 })
     } catch (error) {
         return new Response("Failed to fetch all Products", { status: 500 })
     }

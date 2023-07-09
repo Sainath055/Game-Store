@@ -28,14 +28,20 @@ const Home = () => {
   const [sideHeading, setSideHeading] = useState('');
 
   const fetchProductsForAll = async () => {
-    const response = await fetch("/api/home", { cache: "no-cache" });
-    const data = await response.json();
-
-    setAllProducts(data.allProducts)
-    setBannerProducts(data.bannerProducts)
-    setsideSecProducs(data.sideSecProducts)
-    setSideHeading(data.sideSecHeading)
-    setLoading(false)
+    try {
+      const response = await fetch("/api/home", { cache: "no-cache" });
+      const data = await response.json();
+      if (response.ok) {
+        setAllProducts(data.allProducts)
+        setBannerProducts(data.bannerProducts)
+        setsideSecProducs(data.sideSecProducts)
+        setSideHeading(data.sideSecHeading)
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false)
+    }
   }
   
   useEffect(() => {
