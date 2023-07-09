@@ -29,7 +29,7 @@ const Admins = () => {
   const [existingAdmins, setExistingAdmins] = useState([]);
 
   const fetchAdmins = async () => {
-    const response = await fetch("/api/admin");
+    const response = await fetch("/api/admin", { cache: "no-cache" });
     const data = await response.json();
 
     setExistingAdmins(data);

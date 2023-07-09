@@ -27,7 +27,7 @@ const Banner = () => {
   const [sideSecHeading, setSideSecHeading] = useState(null);
 
   const fetchProductsLessData = async () => {
-    const response = await fetch("/api/banner&sideSec/products")
+    const response = await fetch("/api/banner&sideSec/products", { cache: "no-cache" })
     const data = await response.json();
 
     setAllLessData(data);

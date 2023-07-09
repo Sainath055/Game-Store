@@ -28,7 +28,7 @@ const Home = () => {
   const [sideHeading, setSideHeading] = useState('');
 
   const fetchProductsForAll = async () => {
-    const response = await fetch("/api/home");
+    const response = await fetch("/api/home", { cache: "no-cache" });
     const data = await response.json();
 
     setAllProducts(data.allProducts)

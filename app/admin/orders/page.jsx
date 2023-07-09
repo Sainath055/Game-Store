@@ -26,7 +26,7 @@ const Orders = () => {
 
   const fetchOrdersData = async () => {
     try {
-        const response = await fetch(`/api/orders`, { method: "GET", }); 
+        const response = await fetch(`/api/orders`, { method: "GET", cache: "no-cache" }); 
         const data = await response.json();
         if (response.ok) {
           setOrdersData(data)

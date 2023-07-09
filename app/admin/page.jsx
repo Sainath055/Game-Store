@@ -12,7 +12,7 @@ export default function adminHome() {
 
   const fetchAllData = async () => {
     try {
-        const response = await fetch(`/api/dashboard`, { method: "GET", },{ cache: 'no-store' }); 
+        const response = await fetch(`/api/dashboard`, { method: "GET", cache: "no-cache" }); 
         const data = await response.json();
         if (response.ok) {
           setOrdersData(data.allOrders)

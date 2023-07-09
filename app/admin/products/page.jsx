@@ -25,7 +25,7 @@ const Products = () => {
   const [currProId, setCurrProId] = useState(null);
 
   const fetchProducts = async () => {
-    const response = await fetch("/api/product");
+    const response = await fetch("/api/product", { cache: "no-cache" });
     const data = await response.json();
 
     setAllProducts(data);
