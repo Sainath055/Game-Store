@@ -22,7 +22,7 @@ const Home = () => {
   }
 
   const [isLoading, setLoading] = useState(true);
-  const [allProducts, setAllProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState(null);
   const [bannerProducts, setBannerProducts] = useState([]);
   const [sideSecProducs, setsideSecProducs] = useState([]);
   const [sideHeading, setSideHeading] = useState('');
