@@ -71,7 +71,7 @@ const handler = NextAuth({
     //     jwt:true
     // },
     // jwt:{
-    //     secret: 'XH6bp/TkLvnUkQiPDEZNyHc0CV+VV5RL/n+HdVHoHN0=',
+    //     secret: '',
     // },
     callbacks: {
         async signIn({ account, profile }) {
